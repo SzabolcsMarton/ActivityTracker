@@ -1,6 +1,6 @@
 package activitytrackerdemo.submenus;
 
-public class ListActivitySubMenu implements SubMenu{
+public class DeleteActivityMenuItem implements MenuItem {
     @Override
     public void process() {
 

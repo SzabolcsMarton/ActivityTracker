@@ -2,7 +2,6 @@ package activitytrackerdemo;
 
 import activitytrackerdemo.submenus.*;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class ActivityController {
     }
 
     private void runMenu() {
-        MenuItemType menuItem = null;
+        MenuItemType menuItemType = null;
         printTitle();
 
         do {
@@ -24,15 +23,15 @@ public class ActivityController {
 
             try {
                 int option = Integer.parseInt(scanner.nextLine());
-                menuItem = MenuItemType.byOrdinal(option);
-                assert menuItem != null;
+                menuItemType = MenuItemType.byOrdinal(option);
+                assert menuItemType != null;
 
-                Optional<SubMenu> subMenu = getSubMenu(menuItem);
-                subMenu.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu")).process();
+                Optional<MenuItem> menuItem = getMenuItem(menuItemType);
+                menuItem.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu")).process();
             } catch (Exception exception) {
                 System.out.println("Helytelen menüpont! ");
             }
-        } while (menuItem != MenuItemType.EXIT);
+        } while (menuItemType != MenuItemType.EXIT);
 
     }
 
@@ -49,28 +48,29 @@ public class ActivityController {
         }
     }
 
-    private Optional<SubMenu> getSubMenu(MenuItemType option) {
-        SubMenu subMenu;
+    private Optional<MenuItem> getMenuItem(MenuItemType option) {
+        MenuItem menuItem;
+
         switch (option) {
             case CREATE:
-                subMenu = new CreateSubMenu();
+                menuItem = new CreateMenuItem();
                 break;
 
             case LIST:
-                subMenu = new ListActivitySubMenu();
+                menuItem = new ListActivityMenuItem();
                 break;
 
             case DELETE:
-                subMenu = new DeleteActivitySubMenu();
+                menuItem = new DeleteActivityMenuItem();
                 break;
 
             case EXIT:
-                subMenu = new ExitSubMenu();
+                menuItem = new ExitMenuItem();
                 break;
 
             default:
-                subMenu = null;
+                menuItem = null;
         }
-        return Optional.of(subMenu);
+        return Optional.of(menuItem);
     }
 }

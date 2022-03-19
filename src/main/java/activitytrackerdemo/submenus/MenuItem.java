@@ -1,6 +1,6 @@
 package activitytrackerdemo.submenus;
 
-public interface SubMenu {
+public interface MenuItem {
 
     void process();
 }
