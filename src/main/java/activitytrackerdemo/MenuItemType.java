@@ -1,21 +1,22 @@
 package activitytrackerdemo;
 
-public enum MenuItem {
+public enum MenuItemType {
     CREATE(1,"Új aktivity létrehozása"),
-
-    EXIT(2,"Kilépés");
+    LIST(2,"Összes aktivity kilistázása"),
+    DELETE(3,"Aktivity törlése"),
+    EXIT(0,"Kilépés");
 
     private int ordinal;
     private String description;
 
 
-    MenuItem(int ordinal, String description ) {
+    MenuItemType(int ordinal, String description ) {
         this.ordinal = ordinal;
         this.description = description;
     }
 
-    public static MenuItem byOrdinal(int ord) {
-        for (MenuItem m : MenuItem.values()) {
+    public static MenuItemType byOrdinal(int ord) {
+        for (MenuItemType m : MenuItemType.values()) {
             if (m.ordinal == ord) {
                 return m;
             }

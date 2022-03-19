@@ -1,6 +1,9 @@
 package activitytrackerdemo;
 
-import java.util.Arrays;
+import activitytrackerdemo.submenus.*;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ActivityController {
@@ -13,25 +16,27 @@ public class ActivityController {
     }
 
     private void runMenu() {
-        MenuItem menuItem = null;
+        MenuItemType menuItem = null;
         printTitle();
 
         do {
             printMenu();
+
             try {
-                int option= Integer.parseInt(scanner.nextLine());
-                menuItem = MenuItem.byOrdinal(option);
+                int option = Integer.parseInt(scanner.nextLine());
+                menuItem = MenuItemType.byOrdinal(option);
                 assert menuItem != null;
-                controll(menuItem);
-            }catch (Exception exception){
+
+                Optional<SubMenu> subMenu = getSubMenu(menuItem);
+                subMenu.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu")).process();
+            } catch (Exception exception) {
                 System.out.println("Helytelen menüpont! ");
             }
-        } while (menuItem != MenuItem.EXIT);
+        } while (menuItem != MenuItemType.EXIT);
 
-        System.out.println("\n Viszontlátásra!");
     }
 
-    private void printTitle(){
+    private void printTitle() {
         System.out.println("Activity Tracker");
         System.out.println("Ezzel az alkalmazással nyilvántarthatjuk sportolási tevékenységeinket, és lekérdezhetjük eredményeinket.");
     }
@@ -39,16 +44,33 @@ public class ActivityController {
     private void printMenu() {
         System.out.println("\nKérem válasszon a felsorolt menüpontokból, \nmajd nyomja meg az enter-t:");
         System.out.println();
-        for(MenuItem actual : MenuItem.values()){
+        for (MenuItemType actual : MenuItemType.values()) {
             System.out.println(actual.toString());
         }
     }
 
-    private void controll(MenuItem option) {
-
+    private Optional<SubMenu> getSubMenu(MenuItemType option) {
+        SubMenu subMenu;
         switch (option) {
             case CREATE:
+                subMenu = new CreateSubMenu();
                 break;
+
+            case LIST:
+                subMenu = new ListActivitySubMenu();
+                break;
+
+            case DELETE:
+                subMenu = new DeleteActivitySubMenu();
+                break;
+
+            case EXIT:
+                subMenu = new ExitSubMenu();
+                break;
+
+            default:
+                subMenu = null;
         }
+        return Optional.of(subMenu);
     }
 }
