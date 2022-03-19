@@ -39,10 +39,14 @@ public class CreateMenuItem implements MenuItem {
 
             System.out.println("Leírás :");
             String description = scanner.nextLine();
+
             Activity activity = new Activity(time,description,type);
             success = activityService.saveActivity(activity);
+
             if(!success){
                 System.out.println("Hibás adatok,kérlek probáld újra!");
+            }else {
+                System.out.println("\n\t\t--------Activity sikeresen elmentve!--------");
             }
         }while (!success);
 
@@ -52,7 +56,7 @@ public class CreateMenuItem implements MenuItem {
 
         System.out.println("Kezdés időpont (" + STARTTIME_FORMAT+ ") :");
         String timeString = scanner.nextLine();
-        return LocalDateTime.now().minusYears(2);
+        return LocalDateTime.now(); //.minusYears(2);
         //TODO
 //        SimpleDateFormat formatter = new SimpleDateFormat(STARTTIME_FORMAT);
 //        LocalDateTime time = null;

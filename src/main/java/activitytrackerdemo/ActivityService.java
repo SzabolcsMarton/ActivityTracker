@@ -13,7 +13,7 @@ public class ActivityService {
         if(activity.getStartTime().isBefore( LocalDateTime.now().minusYears(1))){
             return false;
         }
-        activityRepository.saveActivity(activity);
+        activityRepository.insertActivity(activity);
         return true;
     }
 
