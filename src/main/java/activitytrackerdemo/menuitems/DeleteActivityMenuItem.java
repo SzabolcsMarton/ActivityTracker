@@ -1,4 +1,4 @@
-package activitytrackerdemo.submenus;
+package activitytrackerdemo.menuitems;
 
 public class DeleteActivityMenuItem implements MenuItem {
     @Override
