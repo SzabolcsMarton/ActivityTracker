@@ -1,6 +1,8 @@
 package activitytrackerdemo.menuitems;
 
+import java.util.Scanner;
+
 public interface MenuItem {
 
-    void process();
+    void process(Scanner scanner);
 }

@@ -27,7 +27,10 @@ public class ActivityController {
                 assert menuItemType != null;
 
                 Optional<MenuItem> menuItem = getMenuItem(menuItemType);
-                menuItem.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu")).process();
+
+                menuItem.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu"))
+                        .process(scanner);
+
             } catch (Exception exception) {
                 System.out.println("Helytelen menüpont! ");
             }
