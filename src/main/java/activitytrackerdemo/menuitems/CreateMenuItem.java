@@ -24,29 +24,35 @@ public class CreateMenuItem implements MenuItem {
         System.out.println("Kérlek add meg a következő adatokat!");
         System.out.println();
 
-        System.out.println("Aktivity típusa:");
-        for (ActivityType actual : ActivityType.values()) {
-            System.out.println("\t" + actual.getDescription());
-        }
-        System.out.print("\t");
-        int ordinal = scanner.nextInt();
-        scanner.nextLine();
-        ActivityType type = ActivityType.byOrdinal(ordinal);
+        boolean success;
+        do {
+            System.out.println("Aktivity típusa:");
+            for (ActivityType actual : ActivityType.values()) {
+                System.out.println("\t" + actual.getDescription());
+            }
+            System.out.print("\t");
+            int ordinal = scanner.nextInt();
+            scanner.nextLine();
+            ActivityType type = ActivityType.byOrdinal(ordinal);
 
-        LocalDateTime time = getStartTime(scanner);
+            LocalDateTime time = getStartTime(scanner);
 
-        System.out.println("Leírás :");
-        String description = scanner.nextLine();
+            System.out.println("Leírás :");
+            String description = scanner.nextLine();
+            Activity activity = new Activity(time,description,type);
+            success = activityService.saveActivity(activity);
+            if(!success){
+                System.out.println("Hibás adatok,kérlek probáld újra!");
+            }
+        }while (!success);
 
-        Activity activity = new Activity(time,description,type);
-        activityService.saveActivity(activity);
     }
 
     private LocalDateTime getStartTime(Scanner scanner) {
 
         System.out.println("Kezdés időpont (" + STARTTIME_FORMAT+ ") :");
         String timeString = scanner.nextLine();
-        return LocalDateTime.now();
+        return LocalDateTime.now().minusYears(2);
         //TODO
 //        SimpleDateFormat formatter = new SimpleDateFormat(STARTTIME_FORMAT);
 //        LocalDateTime time = null;

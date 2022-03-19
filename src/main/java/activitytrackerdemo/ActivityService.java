@@ -1,9 +1,22 @@
 package activitytrackerdemo;
 
+import java.time.LocalDateTime;
+
 public class ActivityService {
+    ActivityRepository activityRepository;
 
-
-    public void saveActivity(Activity activity){
-
+    public ActivityService() {
+        this.activityRepository = new ActivityRepository();
     }
+
+    public boolean saveActivity(Activity activity){
+        if(activity.getStartTime().isBefore( LocalDateTime.now().minusYears(1))){
+            return false;
+        }
+        activityRepository.saveActivity(activity);
+        return true;
+    }
+
+
+
 }
