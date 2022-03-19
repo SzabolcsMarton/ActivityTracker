@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CreateMenuItem implements MenuItem {
 
     ActivityService activityService;
-    private static final String STARTTIME_FORMAT = "yyyy MM dd";
+    private static final String START_TIME_FORMAT = "yyyy MM dd";
 
     public CreateMenuItem() {
         this.activityService = new ActivityService();
@@ -54,7 +54,7 @@ public class CreateMenuItem implements MenuItem {
 
     private LocalDateTime getStartTime(Scanner scanner) {
 
-        System.out.println("Kezdés időpont (" + STARTTIME_FORMAT+ ") :");
+        System.out.println("Kezdés időpont (" + START_TIME_FORMAT+ ") :");
         String timeString = scanner.nextLine();
         return LocalDateTime.now(); //.minusYears(2);
         //TODO

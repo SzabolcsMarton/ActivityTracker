@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ActivityController {
 
-    Scanner scanner = new Scanner(System.in);
+
 
     public static void main(String[] args) {
         ActivityController controller = new ActivityController();
@@ -21,7 +21,7 @@ public class ActivityController {
         do {
             printMenu();
 
-            try {
+            try(Scanner scanner = new Scanner(System.in)) {
                 int option = Integer.parseInt(scanner.nextLine());
                 menuItemType = MenuItemType.byOrdinal(option);
                 assert menuItemType != null;
