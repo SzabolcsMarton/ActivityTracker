@@ -17,12 +17,13 @@ public class ActivityController {
     private void runMenu() {
         MenuItemType menuItemType = null;
         printTitle();
-
+        Scanner scanner = new Scanner(System.in);
         do {
             printMenu();
 
-            try(Scanner scanner = new Scanner(System.in)) {
-                int option = Integer.parseInt(scanner.nextLine());
+            try {
+                int option = scanner.nextInt();
+                scanner.nextLine();
                 menuItemType = MenuItemType.byOrdinal(option);
                 assert menuItemType != null;
 
@@ -36,6 +37,7 @@ public class ActivityController {
             }
         } while (menuItemType != MenuItemType.EXIT);
 
+        scanner.close();
     }
 
     private void printTitle() {
