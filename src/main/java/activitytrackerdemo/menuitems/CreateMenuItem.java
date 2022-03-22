@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CreateMenuItem implements MenuItem {
 
     ActivityService activityService;
-    private static final String START_TIME_FORMAT = "yyyy MM dd";
+    private static final String START_DAY_FORMAT = "yyyy,MM,dd,hh,mm";
 
     public CreateMenuItem() {
         this.activityService = new ActivityService();
@@ -25,6 +25,7 @@ public class CreateMenuItem implements MenuItem {
         System.out.println();
 
         boolean success;
+
         do {
             System.out.println("Aktivity típusa:");
             for (ActivityType actual : ActivityType.values()) {
@@ -54,18 +55,20 @@ public class CreateMenuItem implements MenuItem {
 
     private LocalDateTime getStartTime(Scanner scanner) {
 
-        System.out.println("Kezdés időpont (" + START_TIME_FORMAT+ ") :");
-        String timeString = scanner.nextLine();
-        return LocalDateTime.now(); //.minusYears(2);
-        //TODO
-//        SimpleDateFormat formatter = new SimpleDateFormat(STARTTIME_FORMAT);
-//        LocalDateTime time = null;
-//
-//        try {
-//            time = formatter.parse(timeString);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return time;
+        System.out.println("Kezdés napja (" + START_DAY_FORMAT + ") :");
+
+        String startDate = scanner.nextLine();
+
+        String[]startDateAndTime = startDate.split(",");
+        int year = Integer.parseInt(startDateAndTime[0].trim());
+        int month = Integer.parseInt(startDateAndTime[1].trim());
+        int day = Integer.parseInt(startDateAndTime[2].trim());
+        int hours = Integer.parseInt(startDateAndTime[3].trim());
+        int minutes = Integer.parseInt(startDateAndTime[4].trim());
+
+        return LocalDateTime.of(year,month,day,hours,minutes);
+
     }
+
+
 }
