@@ -13,8 +13,8 @@ public class CreateMenuItem implements MenuItem {
     ActivityService activityService;
     private static final String START_DAY_FORMAT = "yyyy,MM,dd,hh,mm";
 
-    public CreateMenuItem() {
-        this.activityService = new ActivityService();
+    public CreateMenuItem(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
