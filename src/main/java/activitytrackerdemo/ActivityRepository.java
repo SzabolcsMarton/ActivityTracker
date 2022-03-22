@@ -1,7 +1,6 @@
 package activitytrackerdemo;
 
 import org.mariadb.jdbc.MariaDbDataSource;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
