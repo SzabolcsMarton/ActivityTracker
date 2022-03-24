@@ -16,8 +16,13 @@ public class ActivityService {
         if (isActivityValid(activity))
             return false;
 
-        activityRepository.insertActivity(activity);
-        return true;
+        try {
+            activityRepository.insertActivity(activity);
+            return true;
+        }catch (Exception exception){
+            return false;
+        }
+
     }
 
     private boolean isActivityValid(Activity activity) {

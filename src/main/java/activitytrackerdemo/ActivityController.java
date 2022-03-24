@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class ActivityController {
 
-
-
     public static void main(String[] args) {
         ActivityController controller = new ActivityController();
         controller.runMenu();
