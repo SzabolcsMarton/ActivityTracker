@@ -1,8 +1,9 @@
 # ActivityTracker alkalmazás amivel szabadidős és sport tevékenységeinket rögzíthetjük majd később ezeket kérhetjük le.
 #  A tevékenységeknek időpontot és leirást 
-# lehet megadni ezen kívül rögzítésre kerül a tevékenység tipuse is.
+# lehet megadni ezen kívül rögzítésre kerül a tevékenység tipusa is.
 
 Technológiák:
-
-- Három rétegű alkalmazás
+- Java alapú konzolos alkalmazás.
+- Három rétegű alkalmazás.
 - Adatbázis elérése Jdbc template segitségével.
+- Relációs adatbázis /MariaDb/.
