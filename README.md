@@ -1,4 +1,5 @@
-# ActivityTracker alkalmazás amivel szabadidős és sport tevékenységeinket rögzíthetjük majd később ezeket kérhetjük le.Az tevékenységeknek időpontot és leirást 
+# ActivityTracker alkalmazás amivel szabadidős és sport tevékenységeinket rögzíthetjük majd később ezeket kérhetjük le.
+#  A tevékenységeknek időpontot és leirást 
 # lehet megadni ezen kívül rögzítésre kerül a tevékenység tipuse is.
 
 Technológiák:
