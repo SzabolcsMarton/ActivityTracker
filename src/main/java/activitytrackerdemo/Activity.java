@@ -1,6 +1,7 @@
 package activitytrackerdemo;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Activity {
 
@@ -36,5 +37,16 @@ public class Activity {
 
     public ActivityType getActivityType() {
         return activityType;
+    }
+
+    private String formatTime(LocalDateTime time){
+        DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("yyyy.MM.dd  hh:mm a");
+        return FOMATTER.format(time);
+
+    }
+
+    @Override
+    public String toString() {
+        return formatTime(startTime) + " " + activityType + " - " + description;
     }
 }

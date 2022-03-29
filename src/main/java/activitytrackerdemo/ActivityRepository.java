@@ -4,6 +4,8 @@ import org.mariadb.jdbc.MariaDbDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class ActivityRepository {
 
@@ -34,4 +36,21 @@ public class ActivityRepository {
                 activity.getStartTime(), activity.getDescription(), activity.getActivityType().toString());
 
     }
+
+    public List<Activity> selectAllActivity(){
+        return jdbcTemplate.query("select * from activities order by start_time asc",
+                (rs, rowNum)->
+                        new Activity(rs.getTimestamp("start_time").toLocalDateTime(),
+                                rs.getString("activity_desc"),
+                                ActivityType.valueOf(rs.getString("activity_type"))));
+
+    }
+
+    public void deleteActivityByDateAndType(LocalDateTime time, ActivityType type){
+        jdbcTemplate.update("delete from activities where activity_type = ? and start_time = ?",type,time);
+    }
+
+
+
+
 }

@@ -52,28 +52,13 @@ public class ActivityController {
     }
 
     private Optional<MenuItem> getMenuItem(MenuItemType option) {
-        MenuItem menuItem;
+        MenuItem menuItem = switch (option) {
+            case CREATE -> new CreateMenuItem();
+            case LIST -> new ListActivityMenuItem();
+            case DELETE -> new DeleteActivityMenuItem();
+            case EXIT -> new ExitMenuItem();
+        };
 
-        switch (option) {
-            case CREATE:
-                menuItem = new CreateMenuItem();
-                break;
-
-            case LIST:
-                menuItem = new ListActivityMenuItem();
-                break;
-
-            case DELETE:
-                menuItem = new DeleteActivityMenuItem();
-                break;
-
-            case EXIT:
-                menuItem = new ExitMenuItem();
-                break;
-
-            default:
-                menuItem = null;
-        }
         return Optional.of(menuItem);
     }
 }

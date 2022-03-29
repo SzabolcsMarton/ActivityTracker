@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class CreateMenuItem implements MenuItem {
 
     ActivityService activityService;
-    private static final String START_DAY_FORMAT = "yyyy,MM,dd,hh,mm";
 
     public CreateMenuItem() {
         this.activityService = new ActivityService();
@@ -36,7 +35,8 @@ public class CreateMenuItem implements MenuItem {
             scanner.nextLine();
             ActivityType type = ActivityType.byOrdinal(ordinal);
 
-            LocalDateTime time = getStartTime(scanner);
+            System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + ") :");
+            LocalDateTime time = MenuHelpers.getStartTime(scanner);
 
             System.out.println("Leírás :");
             String description = scanner.nextLine();
@@ -53,22 +53,7 @@ public class CreateMenuItem implements MenuItem {
 
     }
 
-    private LocalDateTime getStartTime(Scanner scanner) {
 
-        System.out.println("Kezdés napja (" + START_DAY_FORMAT + ") :");
-
-        String startDate = scanner.nextLine();
-
-        String[]startDateAndTime = startDate.split(",");
-        int year = Integer.parseInt(startDateAndTime[0].trim());
-        int month = Integer.parseInt(startDateAndTime[1].trim());
-        int day = Integer.parseInt(startDateAndTime[2].trim());
-        int hours = Integer.parseInt(startDateAndTime[3].trim());
-        int minutes = Integer.parseInt(startDateAndTime[4].trim());
-
-        return LocalDateTime.of(year,month,day,hours,minutes);
-
-    }
 
 
 }
