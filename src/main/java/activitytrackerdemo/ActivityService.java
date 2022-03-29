@@ -2,6 +2,7 @@ package activitytrackerdemo;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ActivityService {
     public static final int MIN_LENGTH = 5;
@@ -25,6 +26,10 @@ public class ActivityService {
 
     }
 
+    public List<Activity> getAllActivities() {
+        return activityRepository.selectAllActivity();
+    }
+
     private boolean isActivityValid(Activity activity) {
         if (activity == null ||
                 activity.getDescription().length() < MIN_LENGTH ||
@@ -33,6 +38,7 @@ public class ActivityService {
         }
         return false;
     }
+
 
 
 }
