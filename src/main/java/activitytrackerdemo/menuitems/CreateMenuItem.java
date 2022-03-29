@@ -26,16 +26,7 @@ public class CreateMenuItem implements MenuItem {
         boolean success;
 
         do {
-            System.out.println("Aktivity típusa:");
-            for (ActivityType actual : ActivityType.values()) {
-                System.out.println("\t" + actual.getDescription());
-            }
-            System.out.print("\t");
-            int ordinal = scanner.nextInt();
-            scanner.nextLine();
-            ActivityType type = ActivityType.byOrdinal(ordinal);
-
-            System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + ") :");
+            ActivityType type = MenuHelpers.getActivityType(scanner);
             LocalDateTime time = MenuHelpers.getStartTime(scanner);
 
             System.out.println("Leírás :");
