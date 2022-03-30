@@ -18,7 +18,12 @@ public class ListActivityMenuItem implements MenuItem {
     public void process(Scanner scanner) {
         System.out.println("Összes tevékenység:");
         System.out.println();
-        printActivities(activityService.getAllActivities());
+        List<Activity> allActivities = activityService.getAllActivities();
+        if(allActivities == null || allActivities.isEmpty()){
+            System.out.println("Nincsenek tárolt tevékenységek");
+            return;
+        }
+        printActivities(allActivities);
     }
 
     private void printActivities(List<Activity> activities){

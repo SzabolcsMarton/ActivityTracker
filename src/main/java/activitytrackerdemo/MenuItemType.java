@@ -4,6 +4,7 @@ public enum MenuItemType {
     CREATE(1,"Új aktivity létrehozása"),
     LIST(2,"Összes aktivity kilistázása"),
     DELETE(3,"Aktivity törlése"),
+    FINDONE(4,"Aktivity keresése dátum és tipus alapján "),
     EXIT(0,"Kilépés");
 
     private int ordinal;

@@ -41,10 +41,5 @@ public class CreateMenuItem implements MenuItem {
                 System.out.println("\n\t\t--------Activity sikeresen elmentve!--------");
             }
         }while (!success);
-
     }
-
-
-
-
 }

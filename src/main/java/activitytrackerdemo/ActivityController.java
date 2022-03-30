@@ -12,7 +12,7 @@ public class ActivityController {
         controller.runMenu();
     }
 
-    private void runMenu() {
+    public void runMenu() {
         MenuItemType menuItemType = null;
         printTitle();
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +56,7 @@ public class ActivityController {
             case CREATE -> new CreateMenuItem();
             case LIST -> new ListActivityMenuItem();
             case DELETE -> new DeleteActivityMenuItem();
+            case FINDONE -> new FindOneActivityMenuItem();
             case EXIT -> new ExitMenuItem();
         };
 

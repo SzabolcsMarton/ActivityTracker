@@ -16,19 +16,47 @@ public class ActivityService {
     public boolean saveActivity(Activity activity) {
         if (isActivityValid(activity))
             return false;
-
         try {
             activityRepository.insertActivity(activity);
             return true;
         }catch (Exception exception){
             return false;
         }
-
     }
 
     public List<Activity> getAllActivities() {
         return activityRepository.selectAllActivity();
     }
+
+    public Activity findOneActivityByTypeAndDate(LocalDateTime time, ActivityType type){
+        String activityString = type.toString();
+        try {
+            return activityRepository.findOneActivityByTypeAndDate(time,activityString);
+        }catch (Exception exception){
+
+            return null;
+        }
+
+    }
+
+    public boolean deleteActivityById(long id){
+        try {
+            activityRepository.deleteActivityById(id);
+            return true;
+        }catch (Exception exception){
+            return false;
+        }
+    }
+
+//    public boolean deleteOneActivityByTypeAndDate(LocalDateTime time, ActivityType type){
+//        try {
+//            String activityString = type.toString();
+//            activityRepository.deleteActivityByDateAndType(time, activityString);
+//            return true;
+//        }catch (Exception exception){
+//            return false;
+//        }
+//    }
 
     private boolean isActivityValid(Activity activity) {
         if (activity == null ||
@@ -38,6 +66,12 @@ public class ActivityService {
         }
         return false;
     }
+
+//    private boolean isStartTimeValid(LocalDateTime time){
+//        if(time.isAfter(LocalDateTime.now())){
+//            return
+//        }
+//    }
 
 
 
