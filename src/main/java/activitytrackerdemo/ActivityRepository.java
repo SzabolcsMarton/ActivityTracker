@@ -57,10 +57,4 @@ public class ActivityRepository {
     public void deleteActivityById(long id) {
         jdbcTemplate.update("delete from activities where id = ?", id);
     }
-
-//    public void deleteActivityByDateAndType(LocalDateTime time, String type) {
-//        jdbcTemplate.update("delete from activities where activity_type = ? and start_time = ?", type, time);
-//    }
-
-
 }

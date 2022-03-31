@@ -36,7 +36,6 @@ public class ActivityService {
 
             return null;
         }
-
     }
 
     public boolean deleteActivityById(long id){
@@ -48,16 +47,6 @@ public class ActivityService {
         }
     }
 
-//    public boolean deleteOneActivityByTypeAndDate(LocalDateTime time, ActivityType type){
-//        try {
-//            String activityString = type.toString();
-//            activityRepository.deleteActivityByDateAndType(time, activityString);
-//            return true;
-//        }catch (Exception exception){
-//            return false;
-//        }
-//    }
-
     private boolean isActivityValid(Activity activity) {
         if (activity == null ||
                 activity.getDescription().length() < MIN_LENGTH ||
@@ -66,13 +55,4 @@ public class ActivityService {
         }
         return false;
     }
-
-//    private boolean isStartTimeValid(LocalDateTime time){
-//        if(time.isAfter(LocalDateTime.now())){
-//            return
-//        }
-//    }
-
-
-
 }
