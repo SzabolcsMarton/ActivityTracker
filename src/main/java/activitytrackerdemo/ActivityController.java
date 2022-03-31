@@ -17,7 +17,6 @@ public class ActivityController {
     }
 
 
-
     public void runMenu() {
         MenuItemType menuItemType = null;
         printTitle();
@@ -40,7 +39,6 @@ public class ActivityController {
                 System.out.println("Helytelen menüpont! ");
             }
         } while (menuItemType != MenuItemType.EXIT);
-
         scanner.close();
     }
 
@@ -68,6 +66,4 @@ public class ActivityController {
 
         return Optional.of(menuItem);
     }
-
-
 }

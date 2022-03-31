@@ -19,15 +19,15 @@ public class ListActivityMenuItem implements MenuItem {
         System.out.println("Összes tevékenység:");
         System.out.println();
         List<Activity> allActivities = activityService.getAllActivities();
-        if(allActivities == null || allActivities.isEmpty()){
+        if (allActivities == null || allActivities.isEmpty()) {
             System.out.println("Nincsenek tárolt tevékenységek");
             return;
         }
         printActivities(allActivities);
     }
 
-    private void printActivities(List<Activity> activities){
-        for (Activity actual : activities){
+    private void printActivities(List<Activity> activities) {
+        for (Activity actual : activities) {
             System.out.println('\t' + actual.toString());
         }
     }

@@ -32,14 +32,14 @@ public class CreateMenuItem implements MenuItem {
             System.out.println("Leírás :");
             String description = scanner.nextLine();
 
-            Activity activity = new Activity(time,description,type);
+            Activity activity = new Activity(time, description, type);
             success = activityService.saveActivity(activity);
 
-            if(!success){
+            if (!success) {
                 System.out.println("Hibás adatok,kérlek probáld újra!");
-            }else {
+            } else {
                 System.out.println("\n\t\t--------Activity sikeresen elmentve!--------");
             }
-        }while (!success);
+        } while (!success);
     }
 }

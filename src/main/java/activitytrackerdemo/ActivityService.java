@@ -19,7 +19,7 @@ public class ActivityService {
         try {
             activityRepository.insertActivity(activity);
             return true;
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return false;
         }
     }
@@ -28,21 +28,20 @@ public class ActivityService {
         return activityRepository.selectAllActivity();
     }
 
-    public Activity findOneActivityByTypeAndDate(LocalDateTime time, ActivityType type){
+    public Activity findOneActivityByTypeAndDate(LocalDateTime time, ActivityType type) {
         String activityString = type.toString();
         try {
-            return activityRepository.findOneActivityByTypeAndDate(time,activityString);
-        }catch (Exception exception){
-
+            return activityRepository.findOneActivityByTypeAndDate(time, activityString);
+        } catch (Exception exception) {
             return null;
         }
     }
 
-    public boolean deleteActivityById(long id){
+    public boolean deleteActivityById(long id) {
         try {
             activityRepository.deleteActivityById(id);
             return true;
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return false;
         }
     }

@@ -39,7 +39,7 @@ public class Activity {
         return activityType;
     }
 
-    private String formatTime(LocalDateTime time){
+    private String formatTime(LocalDateTime time) {
         DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("yyyy.MM.dd  hh:mm a");
         return FOMATTER.format(time);
 

@@ -23,7 +23,7 @@ public class Main {
         }
 
         ActivityRepository activityRepository = new ActivityRepository(dataSource);
-        return  new ActivityService(activityRepository);
+        return new ActivityService(activityRepository);
 
 
     }

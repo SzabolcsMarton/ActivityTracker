@@ -7,25 +7,28 @@ import java.util.Scanner;
 
 public class MenuHelpers {
 
-    public static final String START_DAY_FORMAT = "yyyy,MM,dd,hh,mm";
+    public static final String START_DAY_FORMAT = "yyyy-MM-dd";
+    public static final String START_TIME_FORMAT = "hh:mm";
 
     public static LocalDateTime getStartTime(Scanner scanner) {
         System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + ") :");
-
         String startDate = scanner.nextLine();
+        String[] date = startDate.split("-");
+        int year = Integer.parseInt(date[0].trim());
+        int month = Integer.parseInt(date[1].trim());
+        int day = Integer.parseInt(date[2].trim());
 
-        String[]startDateAndTime = startDate.split(",");
-        int year = Integer.parseInt(startDateAndTime[0].trim());
-        int month = Integer.parseInt(startDateAndTime[1].trim());
-        int day = Integer.parseInt(startDateAndTime[2].trim());
-        int hours = Integer.parseInt(startDateAndTime[3].trim());
-        int minutes = Integer.parseInt(startDateAndTime[4].trim());
+        System.out.println("Kezdés időpontja (" + MenuHelpers.START_TIME_FORMAT + ") :");
+        String startTime = scanner.nextLine();
+        String[] time = startTime.split(":");
+        int hours = Integer.parseInt(time[0].trim());
+        int minutes = Integer.parseInt(time[1].trim());
 
-        return LocalDateTime.of(year,month,day,hours,minutes);
+        return LocalDateTime.of(year, month, day, hours, minutes);
 
     }
 
-    public static ActivityType getActivityType(Scanner scanner){
+    public static ActivityType getActivityType(Scanner scanner) {
         System.out.println("Aktivity típusa:");
         for (ActivityType actual : ActivityType.values()) {
             System.out.println("\t" + actual.getDescription());

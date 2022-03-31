@@ -1,17 +1,17 @@
 package activitytrackerdemo;
 
 public enum MenuItemType {
-    CREATE(1,"Új aktivity létrehozása"),
-    LIST(2,"Összes aktivity kilistázása"),
-    DELETE(3,"Aktivity törlése"),
-    FINDONE(4,"Aktivity keresése dátum és tipus alapján "),
-    EXIT(0,"Kilépés");
+    CREATE(1, "Új aktivity létrehozása"),
+    LIST(2, "Összes aktivity kilistázása"),
+    DELETE(3, "Aktivity törlése"),
+    FINDONE(4, "Aktivity keresése dátum és tipus alapján "),
+    EXIT(0, "Kilépés");
 
     private int ordinal;
     private String description;
 
 
-    MenuItemType(int ordinal, String description ) {
+    MenuItemType(int ordinal, String description) {
         this.ordinal = ordinal;
         this.description = description;
     }
@@ -22,7 +22,6 @@ public enum MenuItemType {
                 return m;
             }
         }
-
         return null;
     }
 

@@ -7,7 +7,7 @@ import activitytrackerdemo.ActivityType;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class FindOneActivityMenuItem implements MenuItem{
+public class FindOneActivityMenuItem implements MenuItem {
     ActivityService activityService;
 
     public FindOneActivityMenuItem(ActivityService activityService) {
@@ -21,11 +21,11 @@ public class FindOneActivityMenuItem implements MenuItem{
 
         ActivityType type = MenuHelpers.getActivityType(scanner);
         LocalDateTime time = MenuHelpers.getStartTime(scanner);
-        Activity activity = activityService.findOneActivityByTypeAndDate(time,type);
+        Activity activity = activityService.findOneActivityByTypeAndDate(time, type);
 
-        if(activity == null){
+        if (activity == null) {
             System.out.println("\nNem található tevékenység a megadott adatokkal");
-        }else {
+        } else {
             System.out.println("\nA keresett tevékenység:");
             System.out.println("\t" + activity);
         }

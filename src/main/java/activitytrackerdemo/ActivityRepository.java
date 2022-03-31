@@ -19,7 +19,6 @@ public class ActivityRepository {
     public void insertActivity(Activity activity) {
         jdbcTemplate.update("insert into activities(start_time,activity_desc,activity_type) values(?,?,?)",
                 activity.getStartTime(), activity.getDescription(), activity.getActivityType().toString());
-
     }
 
     public List<Activity> selectAllActivity() {
@@ -28,7 +27,6 @@ public class ActivityRepository {
                         new Activity(rs.getTimestamp("start_time").toLocalDateTime(),
                                 rs.getString("activity_desc"),
                                 ActivityType.valueOf(rs.getString("activity_type"))));
-
     }
 
     public Activity findOneActivityByTypeAndDate(LocalDateTime time, String type) {
