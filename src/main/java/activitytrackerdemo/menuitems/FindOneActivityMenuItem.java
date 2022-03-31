@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class FindOneActivityMenuItem implements MenuItem{
     ActivityService activityService;
 
-    public FindOneActivityMenuItem() {
-        this.activityService = new ActivityService();
+    public FindOneActivityMenuItem(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override

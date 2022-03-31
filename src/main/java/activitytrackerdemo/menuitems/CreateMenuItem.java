@@ -12,8 +12,8 @@ public class CreateMenuItem implements MenuItem {
 
     ActivityService activityService;
 
-    public CreateMenuItem() {
-        this.activityService = new ActivityService();
+    public CreateMenuItem(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override

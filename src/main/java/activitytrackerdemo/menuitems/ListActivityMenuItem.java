@@ -10,8 +10,8 @@ public class ListActivityMenuItem implements MenuItem {
 
     private final ActivityService activityService;
 
-    public ListActivityMenuItem() {
-        this.activityService = new ActivityService();
+    public ListActivityMenuItem(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override

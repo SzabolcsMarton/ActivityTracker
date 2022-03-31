@@ -1,0 +1,1 @@
+CREATE TABLE activities (id INT AUTO_INCREMENT, start_time DATETIME, activity_desc VARCHAR(250), activity_type VARCHAR(10), PRIMARY KEY (id));

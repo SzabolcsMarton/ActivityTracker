@@ -9,8 +9,8 @@ public class ActivityService {
 
     ActivityRepository activityRepository;
 
-    public ActivityService() {
-        this.activityRepository = new ActivityRepository();
+    public ActivityService(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
     public boolean saveActivity(Activity activity) {

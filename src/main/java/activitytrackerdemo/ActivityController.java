@@ -1,16 +1,22 @@
 package activitytrackerdemo;
 
 import activitytrackerdemo.menuitems.*;
+import org.mariadb.jdbc.MariaDbDataSource;
 
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class ActivityController {
 
-    public static void main(String[] args) {
-        ActivityController controller = new ActivityController();
-        controller.runMenu();
+    private final ActivityService activityService;
+
+    public ActivityController(ActivityService activityService) {
+
+        this.activityService = activityService;
     }
+
+
 
     public void runMenu() {
         MenuItemType menuItemType = null;
@@ -53,13 +59,15 @@ public class ActivityController {
 
     private Optional<MenuItem> getMenuItem(MenuItemType option) {
         MenuItem menuItem = switch (option) {
-            case CREATE -> new CreateMenuItem();
-            case LIST -> new ListActivityMenuItem();
-            case DELETE -> new DeleteActivityMenuItem();
-            case FINDONE -> new FindOneActivityMenuItem();
+            case CREATE -> new CreateMenuItem(activityService);
+            case LIST -> new ListActivityMenuItem(activityService);
+            case DELETE -> new DeleteActivityMenuItem(activityService);
+            case FINDONE -> new FindOneActivityMenuItem(activityService);
             case EXIT -> new ExitMenuItem();
         };
 
         return Optional.of(menuItem);
     }
+
+
 }

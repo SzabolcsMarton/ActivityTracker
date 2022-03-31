@@ -11,8 +11,8 @@ public class DeleteActivityMenuItem implements MenuItem {
 
     ActivityService activityService;
 
-    public DeleteActivityMenuItem() {
-        this.activityService = new ActivityService();
+    public DeleteActivityMenuItem(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
