@@ -1,10 +1,9 @@
-### ActivityTracker alkalmazás 
+### Activity Tracker alkalmazás 
 
 ---
 
-#### Használatávalszabadidő és sport tevékenységeink adatait kezelhetjük.
-#### A tevékenységeknek időpontot és leirást 
-#### lehet megadni ezen kívül rögzítésre kerül a tevékenység tipusa is.
+#### Használatával szabadidő és sport tevékenységeink adatait kezelhetjük.
+#### A tevékenységeknek időpontot és leirást lehet megadni, ezen kívül rögzítésre kerül a tevékenység tipusa is.
 
 ___
 
