@@ -62,6 +62,4 @@ class ActivityServiceTest {
 
         assertFalse(service.saveActivity(activity));
     }
-
-
 }

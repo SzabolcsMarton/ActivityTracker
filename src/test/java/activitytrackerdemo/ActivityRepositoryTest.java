@@ -1,17 +1,19 @@
 package activitytrackerdemo;
 
 import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
-
-import javax.sql.DataSource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class ActivityRepositoryTest {
 
@@ -29,11 +31,43 @@ class ActivityRepositoryTest {
         flyway.migrate();
 
         repository = new ActivityRepository(dataSource);
+    }
+
+    @AfterAll
+    static void teardownAll() throws SQLException {
+        MariaDbDataSource dataSource = new MariaDbDataSource();
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
+
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
+    }
+
+    @Test
+    void selectAllActivityTestShouldReturnActivitiesFromDatabase() {
+        // Given
+        // When
+        List<Activity> test = repository.selectAllActivity();
+        // Then
+        assertEquals(3, test.size());
+        assertEquals(ActivityType.RUNNING, test.get(0).getActivityType());
+        assertEquals("egy kis futás", test.get(0).getDescription());
+        assertEquals(LocalDateTime.of(2022, 4, 1, 10, 00), test.get(0).getStartTime());
+
+        assertEquals(ActivityType.RUNNING, test.get(1).getActivityType());
+        assertEquals("egy masik futas", test.get(1).getDescription());
+        assertEquals(LocalDateTime.of(2022, 4, 2, 11, 00), test.get(1).getStartTime());
+
+        assertEquals(ActivityType.BIKING, test.get(2).getActivityType());
+        assertEquals("egy kis biciklizés", test.get(2).getDescription());
+        assertEquals(LocalDateTime.of(2022, 4, 2, 11, 10), test.get(2).getStartTime());
 
     }
 
     @Test
-    void insertActivityThanQTest() {
+    void insertActivityThanQueryTest() {
         // Given
         LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
         Activity activity = new Activity(time, "test_desc", ActivityType.BIKING);
@@ -42,59 +76,85 @@ class ActivityRepositoryTest {
         repository.insertActivity(activity);
         List<Activity> test = repository.selectAllActivity();
         // Then
-        assertEquals(0, emptyList.size());
-        assertEquals(1, test.size());
+        assertEquals(3, emptyList.size());
+        assertEquals(4, test.size());
 
     }
 
     @Test
-    void selectAllActivityTest() {
-        //Given
-        LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
-        LocalDateTime otherTime = LocalDateTime.of(2000, 1, 2, 10, 10);
-
-        Activity activity = new Activity(time, "test_desc", ActivityType.BIKING);
-        Activity otherActivity = new Activity(time, "test_desc_other", ActivityType.RUNNING);
-        repository.insertActivity(activity);
-        repository.insertActivity(otherActivity);
-        //When
-        List<Activity> test = repository.selectAllActivity();
-        //Then
-        assertEquals(2, test.size());
-        assertEquals("test_desc_other", test.get(1).getDescription());
-    }
-
-    @Test
-    void findOneActivityByTypeAndDateTest() {
-        //Given
-        LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
-        Activity activity = new Activity(time, "test_desc", ActivityType.BIKING);
-        repository.insertActivity(activity);
-        //When
-        Activity testActivity = repository.findOneActivityByTypeAndDate(time, ActivityType.BIKING.toString());
-        //Then
-        assertEquals(time, testActivity.getStartTime());
-        assertEquals(ActivityType.BIKING, testActivity.getActivityType());
-    }
-
-    @Test
-    void deleteActivityByIdTest() {
+    void insertActivitiesTest() {
         //Given
         LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
         LocalDateTime otherTime = LocalDateTime.of(2000, 1, 2, 10, 10);
 
         Activity activity = new Activity(time, "test_desc", ActivityType.BIKING);
         Activity otherActivity = new Activity(otherTime, "test_desc_other", ActivityType.RUNNING);
+        //When
         repository.insertActivity(activity);
         repository.insertActivity(otherActivity);
+
+        //Then
+        List<Activity> test = repository.selectAllActivity();
+        assertEquals(5, test.size());
+        assertEquals("test_desc_other", test.get(1).getDescription());
+    }
+
+    @Test
+    void findOneActivityByTypeAndDateTest() {
+        //Given
+        LocalDateTime time = LocalDateTime.of(2022, 4, 2, 11, 00);
+
+        //When
+        Activity foundActivity = repository.findOneActivityByTypeAndDate(time, ActivityType.RUNNING.toString());
+
+        //Then
+        assertEquals(2, foundActivity.getId());
+        assertEquals(time, foundActivity.getStartTime());
+        assertEquals(ActivityType.RUNNING, foundActivity.getActivityType());
+        assertEquals("egy masik futas", foundActivity.getDescription());
+    }
+
+    @Test
+    void findOneActivityByTypeAndDateWithNonExistingParametersShouldThrowExceptionTest() {
+        //Given
+        LocalDateTime time = LocalDateTime.of(2022, 4, 2, 11, 00);
+
+        //When
+        DataAccessException exception = assertThrows(DataAccessException.class,
+                () -> repository.findOneActivityByTypeAndDate(time, ActivityType.RUNNING.toString()));
+        //Then
+        assertNotNull(exception);
+        assertTrue(exception instanceof EmptyResultDataAccessException);
+    }
+
+    @Test
+    void deleteActivityByIdTestListSizeShouldBeTwoTest(){
+        //Given
         List<Activity> test = repository.selectAllActivity();
         //When
-        Activity activityToDelete = repository.findOneActivityByTypeAndDate(otherTime,ActivityType.RUNNING.toString());
-        repository.deleteActivityById(activityToDelete.getId());
-        List<Activity> otherTest = repository.selectAllActivity();
+        repository.deleteActivityById(2);
+        List<Activity> testAfterDelete = repository.selectAllActivity();
         //Then
-        assertEquals(2,test.size());
-        assertEquals(1,otherTest.size());
+        assertEquals(3,test.size());
+        assertEquals(2, testAfterDelete.size());
+    }
 
+    @Test
+    void deleteActivityByIdShouldReturnOneWithExistingIdTest() {
+        //Given
+        //When
+        int numberOfRowsAffected = repository.deleteActivityById(2);
+        //Then
+        assertEquals(1,numberOfRowsAffected);
+
+    }
+
+    @Test
+    void deleteActivityByIdShouldReturnZeroWithNonExistingIdTest() {
+        //Given
+        //When
+        int numberOfRowsAffected = repository.deleteActivityById(10);
+        //Then
+        assertEquals(0, numberOfRowsAffected);
     }
 }
