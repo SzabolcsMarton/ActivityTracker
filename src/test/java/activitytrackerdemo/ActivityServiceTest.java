@@ -57,9 +57,55 @@ class ActivityServiceTest {
     }
 
     @Test
-    void saveActivityShouldReturnFalseWithNullTest(){
+    void saveActivityShouldReturnFalseWithNullActivityTest(){
+        //Given
         Activity activity = null;
-
-        assertFalse(service.saveActivity(activity));
+        //When
+        boolean testResult = service.saveActivity(activity);
+        //Then
+        assertFalse(testResult);
     }
+
+    @Test
+    void findOneActivityByTypeAndDateShouldReturnActivityTest(){
+        //Given
+        LocalDateTime time = LocalDateTime.of(2022,04,01,10,00);
+        //When
+        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.RUNNING);
+        //Then
+        assertEquals(1,activity.getId());
+        assertEquals("egy kis futás", activity.getDescription());
+
+    }
+
+    @Test
+    void findOneActivityByTypeAndDateShouldReturnNullWithNonExistingDateTest(){
+        //Given
+        LocalDateTime time = LocalDateTime.of(1999,04,01,10,00);
+        //When
+        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.RUNNING);
+        //Then
+        assertNull(activity);
+    }
+
+    @Test
+    void findOneActivityByTypeAndDateShouldReturnNullWithWrongTypeTest(){
+        //Given
+        LocalDateTime time = LocalDateTime.of(2022,04,01,10,00);
+        //When
+        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.BIKING);
+        //Then
+        assertNull(activity);
+    }
+
+    @Test
+    void getAllActivitiesReturnedListSizeShouldBeThree(){
+        //Given
+        List<Activity> testResult;
+        //When
+        testResult = service.getAllActivities();
+        //Then
+        assertEquals(3,testResult.size());
+    }
+
 }
