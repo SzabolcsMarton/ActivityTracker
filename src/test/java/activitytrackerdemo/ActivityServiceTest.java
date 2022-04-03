@@ -34,30 +34,39 @@ class ActivityServiceTest {
 
     @Test
     void saveActivityShouldReturnTrueTest() {
-        LocalDateTime time = LocalDateTime.of(2000,1,1,10,10);
-        Activity activity = new Activity(time,"test_desc",ActivityType.BIKING);
-
-        assertTrue(service.saveActivity(activity));
+        //Given
+        LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
+        Activity activity = new Activity(time, "test_desc", ActivityType.BIKING);
+        //When
+        boolean testesult = service.saveActivity(activity);
+        //Then
+        assertTrue(testesult);
     }
 
     @Test
     void saveActivityShouldReturnFalseIfDescLengthIs4CharsTest() {
-        LocalDateTime time = LocalDateTime.of(2000,1,1,10,10);
-        Activity activity = new Activity(time,"test",ActivityType.BIKING);
-
-        assertFalse(service.saveActivity(activity));
+        //Given
+        LocalDateTime time = LocalDateTime.of(2000, 1, 1, 10, 10);
+        Activity activity = new Activity(time, "test", ActivityType.BIKING);
+        //When
+        boolean testResult = service.saveActivity(activity);
+        //Then
+        assertFalse(testResult);
     }
 
     @Test
-    void saveActivityShouldReturnFalseWithTimeLaterTheanNowTest(){
-        LocalDateTime time = LocalDateTime.of(2023,1,1,10,10);
-        Activity activity = new Activity(time,"test",ActivityType.BIKING);
-
-        assertFalse(service.saveActivity(activity));
+    void saveActivityShouldReturnFalseWithTimeLaterTheanNowTest() {
+        //Given
+        LocalDateTime time = LocalDateTime.of(2023, 1, 1, 10, 10);
+        Activity activity = new Activity(time, "test", ActivityType.BIKING);
+        //When
+        boolean testResult = service.saveActivity(activity);
+        //Then
+        assertFalse(testResult);
     }
 
     @Test
-    void saveActivityShouldReturnFalseWithNullActivityTest(){
+    void saveActivityShouldReturnFalseWithNullActivityTest() {
         //Given
         Activity activity = null;
         //When
@@ -67,45 +76,45 @@ class ActivityServiceTest {
     }
 
     @Test
-    void findOneActivityByTypeAndDateShouldReturnActivityTest(){
+    void findOneActivityByTypeAndDateShouldReturnActivityTest() {
         //Given
-        LocalDateTime time = LocalDateTime.of(2022,04,01,10,00);
+        LocalDateTime time = LocalDateTime.of(2022, 04, 01, 10, 00);
         //When
-        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.RUNNING);
+        Activity activity = service.findOneActivityByTypeAndDate(time, ActivityType.RUNNING);
         //Then
-        assertEquals(1,activity.getId());
+        assertEquals(1, activity.getId());
         assertEquals("egy kis futás", activity.getDescription());
 
     }
 
     @Test
-    void findOneActivityByTypeAndDateShouldReturnNullWithNonExistingDateTest(){
+    void findOneActivityByTypeAndDateShouldReturnNullWithNonExistingDateTest() {
         //Given
-        LocalDateTime time = LocalDateTime.of(1999,04,01,10,00);
+        LocalDateTime time = LocalDateTime.of(1999, 04, 01, 10, 00);
         //When
-        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.RUNNING);
+        Activity activity = service.findOneActivityByTypeAndDate(time, ActivityType.RUNNING);
         //Then
         assertNull(activity);
     }
 
     @Test
-    void findOneActivityByTypeAndDateShouldReturnNullWithWrongTypeTest(){
+    void findOneActivityByTypeAndDateShouldReturnNullWithWrongTypeTest() {
         //Given
-        LocalDateTime time = LocalDateTime.of(2022,04,01,10,00);
+        LocalDateTime time = LocalDateTime.of(2022, 04, 01, 10, 00);
         //When
-        Activity activity = service.findOneActivityByTypeAndDate(time,ActivityType.BIKING);
+        Activity activity = service.findOneActivityByTypeAndDate(time, ActivityType.BIKING);
         //Then
         assertNull(activity);
     }
 
     @Test
-    void getAllActivitiesReturnedListSizeShouldBeThree(){
+    void getAllActivitiesReturnedListSizeShouldBeThree() {
         //Given
         List<Activity> testResult;
         //When
         testResult = service.getAllActivities();
         //Then
-        assertEquals(3,testResult.size());
+        assertEquals(3, testResult.size());
     }
 
 }

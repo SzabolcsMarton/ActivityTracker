@@ -16,7 +16,7 @@ public class ListActivityMenuItem implements MenuItem {
 
     @Override
     public void process(Scanner scanner) {
-        System.out.println("Összes tevékenység:");
+        System.out.println("\t\t -------- Összes tevékenység --------");
         System.out.println();
         List<Activity> allActivities = activityService.getAllActivities();
         if (allActivities == null || allActivities.isEmpty()) {
@@ -24,6 +24,8 @@ public class ListActivityMenuItem implements MenuItem {
             return;
         }
         printActivities(allActivities);
+        System.out.println("\t\t -------------------------------------");
+        System.out.println();
     }
 
     private void printActivities(List<Activity> activities) {
