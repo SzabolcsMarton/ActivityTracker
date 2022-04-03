@@ -1,11 +1,11 @@
 package activitytrackerdemo;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ActivityService {
     public static final int MIN_LENGTH = 5;
+    public static final int NUMBER_OF_ROWS_IF_SUCCESS = 1;
 
     ActivityRepository activityRepository;
 
@@ -14,7 +14,7 @@ public class ActivityService {
     }
 
     public boolean saveActivity(Activity activity) {
-        if (isActivityValid(activity))
+        if (isActivityInvalid(activity))
             return false;
         try {
             activityRepository.insertActivity(activity);
@@ -39,19 +39,16 @@ public class ActivityService {
 
     public boolean deleteActivityById(long id) {
         try {
-            activityRepository.deleteActivityById(id);
-            return true;
+            int rowsAffected = activityRepository.deleteActivityById(id);
+            return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
         } catch (Exception exception) {
             return false;
         }
     }
 
-    private boolean isActivityValid(Activity activity) {
-        if (activity == null ||
+    private boolean isActivityInvalid(Activity activity) {
+        return activity == null ||
                 activity.getDescription().length() < MIN_LENGTH ||
-                activity.getStartTime().isAfter(LocalDateTime.now())) {
-            return true;
-        }
-        return false;
+                activity.getStartTime().isAfter(LocalDateTime.now());
     }
 }

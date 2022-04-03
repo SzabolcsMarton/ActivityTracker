@@ -6,6 +6,6 @@ public class ExitMenuItem implements MenuItem {
 
     @Override
     public void process(Scanner scanner) {
-        System.out.println("\nViszontlátásra!");
+        System.out.println("\n ****** Viszontlátásra! ******");
     }
 }

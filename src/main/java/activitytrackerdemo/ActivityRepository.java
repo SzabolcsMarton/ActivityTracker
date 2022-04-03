@@ -37,7 +37,7 @@ public class ActivityRepository {
                 type, time);
     }
 
-    public void deleteActivityById(long id) {
-        jdbcTemplate.update("delete from activities where id = ?", id);
+    public int deleteActivityById(long id) {
+         return jdbcTemplate.update("delete from activities where id = ?", id);
     }
 }

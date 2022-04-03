@@ -1,9 +1,7 @@
 package activitytrackerdemo;
 
 import activitytrackerdemo.menuitems.*;
-import org.mariadb.jdbc.MariaDbDataSource;
 
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
 

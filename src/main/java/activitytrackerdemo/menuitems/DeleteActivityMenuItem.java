@@ -30,7 +30,7 @@ public class DeleteActivityMenuItem implements MenuItem {
         }
         System.out.println("Ezt a tevékenységet szeretnéd törölni? :");
         System.out.println();
-        System.out.println("\t" + activity.toString());
+        System.out.println("\t" + activity);
         System.out.println();
         System.out.println("y- Igen, n- Nem");
         String answer = scanner.nextLine();
