@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
@@ -97,6 +98,20 @@ class ActivityRepositoryTest {
         List<Activity> test = repository.selectAllActivity();
         assertEquals(5, test.size());
         assertEquals("test_desc_other", test.get(1).getDescription());
+    }
+
+    @Test
+    void insertActivityWithExistingDateShouldThrowException(){
+        //Given
+        LocalDateTime time = LocalDateTime.of(2022,04,01,10,00);
+        Activity activity = new Activity(time,"test_test",ActivityType.RUNNING);
+        //When
+        DuplicateKeyException exception = assertThrows(DuplicateKeyException.class,
+                () -> repository.insertActivity(activity));
+        //Then
+        assertNotNull(exception);
+
+
     }
 
     @Test
