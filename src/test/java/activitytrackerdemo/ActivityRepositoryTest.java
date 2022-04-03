@@ -132,7 +132,7 @@ class ActivityRepositoryTest {
     @Test
     void findOneActivityByTypeAndDateWithNonExistingParametersShouldThrowExceptionTest() {
         //Given
-        LocalDateTime time = LocalDateTime.of(2022, 4, 2, 11, 00);
+        LocalDateTime time = LocalDateTime.of(1999, 4, 2, 11, 00);
 
         //When
         DataAccessException exception = assertThrows(DataAccessException.class,
@@ -161,7 +161,6 @@ class ActivityRepositoryTest {
         int numberOfRowsAffected = repository.deleteActivityById(2);
         //Then
         assertEquals(1,numberOfRowsAffected);
-
     }
 
     @Test

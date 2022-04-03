@@ -51,4 +51,6 @@ public class ActivityService {
                 activity.getDescription().length() < MIN_LENGTH ||
                 activity.getStartTime().isAfter(LocalDateTime.now());
     }
+
+
 }
