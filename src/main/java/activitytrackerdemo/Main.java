@@ -24,7 +24,5 @@ public class Main {
 
         ActivityRepository activityRepository = new ActivityRepository(dataSource);
         return new ActivityService(activityRepository);
-
-
     }
 }
