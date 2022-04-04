@@ -117,4 +117,26 @@ class ActivityServiceTest {
         assertEquals(3, testResult.size());
     }
 
+    @Test
+    void deleteActivityByIdShouldReturnTrueWithExistingIdTest(){
+        //Given
+        long testId = 2;
+        boolean testResult;
+        //When
+        testResult = service.deleteActivityById(testId);
+        //Then
+        assertTrue(testResult);
+    }
+
+    @Test
+    void deleteActivityByIdShouldReturnFalseWithNonExistingIdTest(){
+        //Given
+        long testId = 5;
+        boolean testResult;
+        //When
+        testResult = service.deleteActivityById(testId);
+        //Then
+        assertFalse(testResult);
+    }
+
 }

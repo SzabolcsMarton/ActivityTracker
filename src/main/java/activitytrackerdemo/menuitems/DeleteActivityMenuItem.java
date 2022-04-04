@@ -28,7 +28,7 @@ public class DeleteActivityMenuItem implements MenuItem {
             System.out.println("Nem található tevékenység a megadott adatokkal");
             return;
         }
-        System.out.println("Ezt a tevékenységet szeretnéd törölni? :");
+        System.out.println("Ezt a tevékenységet szeretnéd törölni?");
         System.out.println();
         System.out.println("\t" + activity);
         System.out.println();

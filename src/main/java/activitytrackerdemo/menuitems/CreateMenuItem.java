@@ -29,7 +29,7 @@ public class CreateMenuItem implements MenuItem {
             ActivityType type = MenuHelpers.getActivityType(scanner);
             LocalDateTime time = MenuHelpers.getStartTime(scanner);
 
-            System.out.println("Leírás :");
+            System.out.println("Leírás:");
             String description = scanner.nextLine();
 
             Activity activity = new Activity(time, description, type);
