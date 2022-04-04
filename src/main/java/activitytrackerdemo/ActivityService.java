@@ -38,12 +38,8 @@ public class ActivityService {
     }
 
     public boolean deleteActivityById(long id) {
-        try {
             int rowsAffected = activityRepository.deleteActivityById(id);
             return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
-        } catch (Exception exception) {
-            return false;
-        }
     }
 
     private boolean isActivityInvalid(Activity activity) {
