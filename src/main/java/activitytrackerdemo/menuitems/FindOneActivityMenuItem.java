@@ -4,6 +4,7 @@ import activitytrackerdemo.Activity;
 import activitytrackerdemo.ActivityService;
 import activitytrackerdemo.ActivityType;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ public class FindOneActivityMenuItem implements MenuItem {
     public void process(Scanner scanner) {
         System.out.println("\tKeresés menüpont");
         System.out.println("A tevékenység megkereséséhez add meg a következő adatokat!");
+
         ActivityType type = MenuHelpers.getActivityType(scanner);
         LocalDateTime time = MenuHelpers.getStartTime(scanner);
         Activity activity = activityService.findOneActivityByTypeAndDate(time, type);
@@ -27,6 +29,26 @@ public class FindOneActivityMenuItem implements MenuItem {
         } else {
             System.out.println("\nA keresett tevékenység:");
             System.out.println("\t" + activity);
+        }
+
+    }
+
+    public static void clrscr() {
+
+        //Clears Screen in java
+
+        try {
+
+            if (System.getProperty("os.name").contains("Windows"))
+
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+
+            else
+
+                Runtime.getRuntime().exec("clear");
+
+        } catch (IOException | InterruptedException ex) {
+            System.out.println("Happyday");
         }
 
     }
