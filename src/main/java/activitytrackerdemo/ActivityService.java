@@ -1,5 +1,7 @@
 package activitytrackerdemo;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,14 +16,12 @@ public class ActivityService {
     }
 
     public boolean saveActivity(Activity activity) {
-        if (isActivityInvalid(activity))
-            return false;
-        try {
-            activityRepository.insertActivity(activity);
-            return true;
-        } catch (Exception exception) {
+        if (isActivityInvalid(activity)){
             return false;
         }
+        int rowsAffected = activityRepository.insertActivity(activity);
+        return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
+
     }
 
     public List<Activity> getAllActivities() {
@@ -32,7 +32,7 @@ public class ActivityService {
         String activityString = type.toString();
         try {
             return activityRepository.findOneActivityByTypeAndDate(time, activityString);
-        } catch (Exception exception) {
+        } catch (EmptyResultDataAccessException exception) {
             return null;
         }
     }
