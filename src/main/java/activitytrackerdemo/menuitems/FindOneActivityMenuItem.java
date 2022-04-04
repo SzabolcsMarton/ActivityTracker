@@ -16,9 +16,8 @@ public class FindOneActivityMenuItem implements MenuItem {
 
     @Override
     public void process(Scanner scanner) {
-        System.out.println("Keresés menüpont");
+        System.out.println("\tKeresés menüpont");
         System.out.println("A tevékenység megkereséséhez add meg a következő adatokat!");
-
         ActivityType type = MenuHelpers.getActivityType(scanner);
         LocalDateTime time = MenuHelpers.getStartTime(scanner);
         Activity activity = activityService.findOneActivityByTypeAndDate(time, type);
