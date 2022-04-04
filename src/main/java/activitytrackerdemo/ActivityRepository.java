@@ -8,16 +8,14 @@ import java.util.List;
 
 public class ActivityRepository {
 
-    private DataSource dataSource;
     private final JdbcTemplate jdbcTemplate;
 
     public ActivityRepository(DataSource dataSource) {
-        this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void insertActivity(Activity activity) {
-        jdbcTemplate.update("insert into activities(start_time,activity_desc,activity_type) values(?,?,?)",
+    public int insertActivity(Activity activity) {
+       return jdbcTemplate.update("insert into activities(start_time,activity_desc,activity_type) values(?,?,?)",
                 activity.getStartTime(), activity.getDescription(), activity.getActivityType().toString());
     }
 
