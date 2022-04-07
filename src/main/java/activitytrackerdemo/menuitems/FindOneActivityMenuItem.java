@@ -30,26 +30,5 @@ public class FindOneActivityMenuItem implements MenuItem {
             System.out.println("\nA keresett tevékenység:");
             System.out.println("\t" + activity);
         }
-
-    }
-
-    public static void clrscr() {
-
-        //Clears Screen in java
-
-        try {
-
-            if (System.getProperty("os.name").contains("Windows"))
-
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-
-            else
-
-                Runtime.getRuntime().exec("clear");
-
-        } catch (IOException | InterruptedException ex) {
-            System.out.println("Happyday");
-        }
-
     }
 }

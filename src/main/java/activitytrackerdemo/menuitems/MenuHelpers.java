@@ -11,14 +11,14 @@ public class MenuHelpers {
     public static final String START_TIME_FORMAT = "hh:mm";
 
     public static LocalDateTime getStartTime(Scanner scanner) {
-        System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + ") :");
+        System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + "):");
         String startDate = scanner.nextLine();
         String[] date = startDate.split("-");
         int year = Integer.parseInt(date[0].trim());
         int month = Integer.parseInt(date[1].trim());
         int day = Integer.parseInt(date[2].trim());
 
-        System.out.println("Kezdés időpontja (" + MenuHelpers.START_TIME_FORMAT + ") :");
+        System.out.println("Kezdés időpontja (" + MenuHelpers.START_TIME_FORMAT + "):");
         String startTime = scanner.nextLine();
         String[] time = startTime.split(":");
         int hours = Integer.parseInt(time[0].trim());

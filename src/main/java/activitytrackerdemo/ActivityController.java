@@ -2,6 +2,7 @@ package activitytrackerdemo;
 
 import activitytrackerdemo.menuitems.*;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -33,8 +34,8 @@ public class ActivityController {
                 menuItem.orElseThrow(() -> new IllegalArgumentException("Helytelen submenu"))
                         .process(scanner);
 
-            } catch (Exception exception) {
-                System.out.println("Helytelen menüpont! ");
+            } catch (NullPointerException | InputMismatchException | IllegalArgumentException exception) {
+                System.out.println("Helytelen menüpont!");
             }
         } while (menuItemType != MenuItemType.EXIT);
         scanner.close();
