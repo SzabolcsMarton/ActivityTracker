@@ -4,12 +4,12 @@ import activitytrackerdemo.Activity;
 import activitytrackerdemo.ActivityService;
 import activitytrackerdemo.ActivityType;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class FindOneActivityMenuItem implements MenuItem {
-    ActivityService activityService;
+
+    private final ActivityService activityService;
 
     public FindOneActivityMenuItem(ActivityService activityService) {
         this.activityService = activityService;

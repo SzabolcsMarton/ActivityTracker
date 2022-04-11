@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CreateMenuItem implements MenuItem {
 
-    ActivityService activityService;
+    private final ActivityService activityService;
 
     public CreateMenuItem(ActivityService activityService) {
         this.activityService = activityService;

@@ -58,6 +58,7 @@ public class ActivityController {
         MenuItem menuItem = switch (option) {
             case CREATE -> new CreateMenuItem(activityService);
             case LIST -> new ListActivityMenuItem(activityService);
+            case UPDATE -> new UpdateMenuItem(activityService);
             case DELETE -> new DeleteActivityMenuItem(activityService);
             case FINDONE -> new FindOneActivityMenuItem(activityService);
             case EXIT -> new ExitMenuItem();

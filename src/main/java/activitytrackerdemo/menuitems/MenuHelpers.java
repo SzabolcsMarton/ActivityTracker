@@ -38,4 +38,6 @@ public class MenuHelpers {
         scanner.nextLine();
         return ActivityType.byOrdinal(ordinal);
     }
+
+
 }
