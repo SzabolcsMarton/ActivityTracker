@@ -3,8 +3,9 @@ package activitytrackerdemo;
 public enum MenuItemType {
     CREATE(1, "Új aktivity létrehozása"),
     LIST(2, "Összes aktivity kilistázása"),
-    DELETE(3, "Aktivity törlése"),
-    FINDONE(4, "Aktivity keresése dátum és tipus alapján "),
+    UPDATE(3,"Activity módosítása"),
+    DELETE(4, "Aktivity törlése"),
+    FINDONE(5, "Aktivity keresése dátum és tipus alapján "),
     EXIT(0, "Kilépés");
 
     private int ordinal;
