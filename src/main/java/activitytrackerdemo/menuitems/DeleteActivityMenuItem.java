@@ -24,10 +24,12 @@ public class DeleteActivityMenuItem implements MenuItem {
         LocalDateTime time = MenuHelpers.getStartTime(scanner);
 
         Activity activity = activityService.findOneActivityByTypeAndDate(time, type);
+
         if (activity == null) {
             System.out.println("Nem található tevékenység a megadott adatokkal");
             return;
         }
+
         System.out.println("Ezt a tevékenységet szeretnéd törölni?");
         System.out.println();
         System.out.println("\t" + activity);
