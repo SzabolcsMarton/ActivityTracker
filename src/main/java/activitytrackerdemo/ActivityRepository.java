@@ -47,8 +47,6 @@ public class ActivityRepository {
         return jdbcTemplate.update("update activities set activity_desc = ? where id = ?",description,id);
     }
 
-
-
     public int deleteActivityById(long id) {
          return jdbcTemplate.update("delete from activities where id = ?", id);
     }

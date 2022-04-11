@@ -37,6 +37,29 @@ public class ActivityService {
         }
     }
 
+    public boolean modifyActivityStartTimeById(long id, LocalDateTime newTime){
+        if (isActivityStartTimeInvalid(newTime)){
+            return false;
+        }
+        int rowsAffected = activityRepository.upDateActivityStartTimeById(id,newTime);
+        return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
+    }
+
+    public boolean modifyActivityTypeById(long id, ActivityType type){
+        String activityTypeString = type.toString();
+        int rowsAffected = activityRepository.upDateActivityTypeById(id, activityTypeString);
+        return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
+    }
+
+    public boolean modifyActivityDescriptionById(long id, String description){
+        if (isActivityDescriptionInValid(description)){
+            return false;
+        }
+        int rowsAffected = activityRepository.upDateActivityDescriptionById(id, description);
+        return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
+    }
+
+
     public boolean deleteActivityById(long id) {
             int rowsAffected = activityRepository.deleteActivityById(id);
             return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
@@ -48,5 +71,11 @@ public class ActivityService {
                 activity.getStartTime().isAfter(LocalDateTime.now());
     }
 
+    private boolean isActivityDescriptionInValid(String description){
+        return description.length() < MIN_LENGTH;
+    }
 
+    private boolean isActivityStartTimeInvalid(LocalDateTime startTime){
+        return  startTime.isAfter(LocalDateTime.now());
+    }
 }
