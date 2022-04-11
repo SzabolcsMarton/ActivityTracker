@@ -34,17 +34,17 @@ class ActivityRepositoryTest {
         repository = new ActivityRepository(dataSource);
     }
 
-    @AfterAll
-    static void teardownAll() throws SQLException {
-        MariaDbDataSource dataSource = new MariaDbDataSource();
-        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
-        dataSource.setUser("root");
-        dataSource.setPassword("root");
-
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-        flyway.clean();
-        flyway.migrate();
-    }
+//    @AfterAll
+//    static void teardownAll() throws SQLException {
+//        MariaDbDataSource dataSource = new MariaDbDataSource();
+//        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
+//        dataSource.setUser("root");
+//        dataSource.setPassword("root");
+//
+//        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+//        flyway.clean();
+//        flyway.migrate();
+//    }
 
     @Test
     void selectAllActivityTestShouldReturnActivitiesFromDatabase() {
@@ -140,6 +140,70 @@ class ActivityRepositoryTest {
         //Then
         assertNotNull(exception);
         assertTrue(exception instanceof EmptyResultDataAccessException);
+    }
+
+    @Test
+    void upDateActivityStartTimeByIdShouldUpdateStartTimeToNewstartTimeAndReturnOneWithExistingIdTest(){
+        //Given
+        LocalDateTime newTime = LocalDateTime.of(2021,4,1,10,00);
+        //When
+        int test = repository.upDateActivityStartTimeById(1,newTime);
+        //Then
+        assertEquals(newTime,repository.selectAllActivity().get(0).getStartTime());
+        assertEquals(1,test);
+    }
+
+    @Test
+    void upDateActivityStartTimeByIdShouldReturnZeroWithNonExistingIdTest(){
+        //Given
+        LocalDateTime newTime = LocalDateTime.of(2021,4,1,10,00);
+        //When
+        int test = repository.upDateActivityStartTimeById(4,newTime);
+        //Then
+        assertEquals(0,test);
+    }
+
+    @Test
+    void upDateActivityTypeByIdShouldChangeTypeAndReturnOneWithExisingIdTest(){
+        //Given
+        ActivityType newType = ActivityType.HIKING;
+        //When
+        int test = repository.upDateActivityTypeById(1,newType.toString());
+        //Then
+        assertEquals(1,test);
+        assertEquals(newType,repository.selectAllActivity().get(0).getActivityType());
+    }
+
+    @Test
+    void upDateActivityTypeByIdShouldReturnZeroWithNonExistingIdTest(){
+        //Given
+        ActivityType newType = ActivityType.HIKING;
+        //When
+        int test = repository.upDateActivityTypeById(5,newType.toString());
+        //Then
+        assertEquals(0,test);
+
+    }
+
+    @Test
+    void upDateActivityDescriptionByIdShouldChangeDescriptionAndReturnOneWithExistingIdTest(){
+        //Given
+       String testDesc = "testing";
+        //When
+        int test = repository.upDateActivityDescriptionById(1,testDesc);
+        //Then
+        assertEquals(testDesc,repository.selectAllActivity().get(0).getDescription());
+        assertEquals(1,test);
+    }
+
+    @Test
+    void upDateActivityDescriptionByIdShoulddReturnZeroWithExistingIdTest(){
+        //Given
+        String testDesc = "testing";
+        //When
+        int test = repository.upDateActivityDescriptionById(5,testDesc);
+        //Then
+        assertEquals(0,test);
     }
 
     @Test

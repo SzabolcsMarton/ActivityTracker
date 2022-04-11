@@ -35,7 +35,23 @@ public class ActivityRepository {
                 type, time);
     }
 
+    public int upDateActivityStartTimeById(long id, LocalDateTime time){
+        return jdbcTemplate.update("update activities set start_time = ? where id = ?",time,id);
+    }
+
+    public int upDateActivityTypeById(long id, String activityTypeString){
+        return jdbcTemplate.update("update activities set activity_type = ? where id = ?",activityTypeString,id);
+    }
+
+    public int upDateActivityDescriptionById(long id, String description){
+        return jdbcTemplate.update("update activities set activity_desc = ? where id = ?",description,id);
+    }
+
+
+
     public int deleteActivityById(long id) {
          return jdbcTemplate.update("delete from activities where id = ?", id);
     }
+
+
 }
