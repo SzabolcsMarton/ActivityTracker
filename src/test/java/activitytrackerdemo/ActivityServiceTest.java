@@ -1,6 +1,7 @@
 package activitytrackerdemo;
 
 import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
@@ -30,6 +31,17 @@ class ActivityServiceTest {
 
         repository = new ActivityRepository(dataSource);
         service = new ActivityService(repository);
+    }
+    @AfterAll
+    static void teardownAll() throws SQLException {
+        MariaDbDataSource dataSource = new MariaDbDataSource();
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
+
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
     }
 
     @Test
@@ -115,6 +127,42 @@ class ActivityServiceTest {
         testResult = service.getAllActivities();
         //Then
         assertEquals(3, testResult.size());
+    }
+
+    @Test
+    void modifyActivityStartTimeByIdShouldReturnTrueTest(){
+        //Given
+        LocalDateTime testTime = LocalDateTime.of(1980,10,11,10,10);
+        long testId = 1;
+        boolean testResult;
+        //Given
+        testResult = service.modifyActivityStartTimeById(testId,testTime);
+        //Then
+        assertTrue(testResult);
+    }
+
+    @Test
+    void modifyActivityStartTimeByIdShouldReturnFalseWithTimeInFutureTest(){
+        //Given
+        LocalDateTime testTime = LocalDateTime.of(2023,10,11,10,10);
+        long testId = 1;
+        boolean testResult;
+        //Given
+        testResult = service.modifyActivityStartTimeById(testId,testTime);
+        //Then
+        assertFalse(testResult);
+    }
+
+    @Test
+    void modifyActivityStartTimeByIdShouldReturnFalseWithNonExistingIdTest(){
+        //Given
+        LocalDateTime testTime = LocalDateTime.of(1980,10,11,10,10);
+        long testId = 5;
+        boolean testResult;
+        //Given
+        testResult = service.modifyActivityStartTimeById(testId,testTime);
+        //Then
+        assertFalse(testResult);
     }
 
     @Test

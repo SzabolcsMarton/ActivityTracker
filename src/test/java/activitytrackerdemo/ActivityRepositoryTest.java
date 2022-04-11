@@ -34,17 +34,17 @@ class ActivityRepositoryTest {
         repository = new ActivityRepository(dataSource);
     }
 
-//    @AfterAll
-//    static void teardownAll() throws SQLException {
-//        MariaDbDataSource dataSource = new MariaDbDataSource();
-//        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
-//        dataSource.setUser("root");
-//        dataSource.setPassword("root");
-//
-//        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
-//        flyway.clean();
-//        flyway.migrate();
-//    }
+    @AfterAll
+    static void teardownAll() throws SQLException {
+        MariaDbDataSource dataSource = new MariaDbDataSource();
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/activitytracker?useUnicode=true");
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
+
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
+    }
 
     @Test
     void selectAllActivityTestShouldReturnActivitiesFromDatabase() {
