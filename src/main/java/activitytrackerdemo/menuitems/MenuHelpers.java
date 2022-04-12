@@ -9,17 +9,16 @@ public class MenuHelpers {
 
     public static final String START_DAY_FORMAT = "yyyy-MM-dd";
     public static final String START_TIME_FORMAT = "hh:mm";
-    private static String []date;
-
-    private static String []time;
+    private static String[] date;
+    private static String[] time;
 
     public static LocalDateTime getStartTime(Scanner scanner) {
         System.out.println("Kezdés napja (" + MenuHelpers.START_DAY_FORMAT + "):");
         String startDate = scanner.nextLine();
         System.out.println("Kezdés időpontja (" + MenuHelpers.START_TIME_FORMAT + "):");
         String startTime = scanner.nextLine();
-         date = startDate.split("-");
-         time = startTime.split(":");
+        date = startDate.split("-");
+        time = startTime.split(":");
         ensureGetAllDataForLocalDateTime(date, time, scanner);
         return convertToLocalDateTime(date, time, scanner);
 
