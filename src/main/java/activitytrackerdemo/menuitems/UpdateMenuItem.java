@@ -16,7 +16,6 @@ public class UpdateMenuItem implements MenuItem{
         this.activityService = activityService;
     }
 
-
     @Override
     public void process(Scanner scanner) {
         System.out.println("\nMódosítás menüpont.");
