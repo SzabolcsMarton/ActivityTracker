@@ -15,7 +15,7 @@ public class ActivityRepository {
     }
 
     public int insertActivity(Activity activity) {
-       return jdbcTemplate.update("insert into activities(start_time,activity_desc,activity_type) values(?,?,?)",
+        return jdbcTemplate.update("insert into activities(start_time,activity_desc,activity_type) values(?,?,?)",
                 activity.getStartTime(), activity.getDescription(), activity.getActivityType().toString());
     }
 
@@ -35,20 +35,20 @@ public class ActivityRepository {
                 type, time);
     }
 
-    public int upDateActivityStartTimeById(long id, LocalDateTime time){
-        return jdbcTemplate.update("update activities set start_time = ? where id = ?",time,id);
+    public int upDateActivityStartTimeById(long id, LocalDateTime time) {
+        return jdbcTemplate.update("update activities set start_time = ? where id = ?", time, id);
     }
 
-    public int upDateActivityTypeById(long id, String activityTypeString){
-        return jdbcTemplate.update("update activities set activity_type = ? where id = ?",activityTypeString,id);
+    public int upDateActivityTypeById(long id, String activityTypeString) {
+        return jdbcTemplate.update("update activities set activity_type = ? where id = ?", activityTypeString, id);
     }
 
-    public int upDateActivityDescriptionById(long id, String description){
-        return jdbcTemplate.update("update activities set activity_desc = ? where id = ?",description,id);
+    public int upDateActivityDescriptionById(long id, String description) {
+        return jdbcTemplate.update("update activities set activity_desc = ? where id = ?", description, id);
     }
 
     public int deleteActivityById(long id) {
-         return jdbcTemplate.update("delete from activities where id = ?", id);
+        return jdbcTemplate.update("delete from activities where id = ?", id);
     }
 
 

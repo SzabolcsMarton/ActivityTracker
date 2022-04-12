@@ -1,15 +1,15 @@
 package activitytrackerdemo;
 
 public enum MenuItemType {
-    CREATE(1, "Új aktivity létrehozása"),
-    LIST(2, "Összes aktivity kilistázása"),
-    UPDATE(3,"Activity módosítása"),
+    CREATE(1, "Aktivity létrehozása"),
+    LIST(2, "Aktivity-k listázása/szűrése"),
+    UPDATE(3, "Activity módosítása"),
     DELETE(4, "Aktivity törlése"),
     FINDONE(5, "Aktivity keresése dátum és tipus alapján "),
     EXIT(0, "Kilépés");
 
-    private int ordinal;
-    private String description;
+    private final int ordinal;
+    private final String description;
 
 
     MenuItemType(int ordinal, String description) {

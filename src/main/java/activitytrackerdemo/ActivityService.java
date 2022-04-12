@@ -16,7 +16,7 @@ public class ActivityService {
     }
 
     public boolean saveActivity(Activity activity) {
-        if (isActivityInvalid(activity)){
+        if (isActivityInvalid(activity)) {
             return false;
         }
         int rowsAffected = activityRepository.insertActivity(activity);
@@ -37,32 +37,31 @@ public class ActivityService {
         }
     }
 
-    public boolean modifyActivityStartTimeById(long id, LocalDateTime newTime){
-        if (isActivityStartTimeInvalid(newTime)){
+    public boolean modifyActivityStartTimeById(long id, LocalDateTime newTime) {
+        if (isActivityStartTimeInvalid(newTime)) {
             return false;
         }
-        int rowsAffected = activityRepository.upDateActivityStartTimeById(id,newTime);
+        int rowsAffected = activityRepository.upDateActivityStartTimeById(id, newTime);
         return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
     }
 
-    public boolean modifyActivityTypeById(long id, ActivityType type){
+    public boolean modifyActivityTypeById(long id, ActivityType type) {
         String activityTypeString = type.toString();
         int rowsAffected = activityRepository.upDateActivityTypeById(id, activityTypeString);
         return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
     }
 
-    public boolean modifyActivityDescriptionById(long id, String description){
-        if (isActivityDescriptionInValid(description)){
+    public boolean modifyActivityDescriptionById(long id, String description) {
+        if (isActivityDescriptionInValid(description)) {
             return false;
         }
         int rowsAffected = activityRepository.upDateActivityDescriptionById(id, description);
         return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
     }
 
-
     public boolean deleteActivityById(long id) {
-            int rowsAffected = activityRepository.deleteActivityById(id);
-            return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
+        int rowsAffected = activityRepository.deleteActivityById(id);
+        return rowsAffected == NUMBER_OF_ROWS_IF_SUCCESS;
     }
 
     private boolean isActivityInvalid(Activity activity) {
@@ -71,11 +70,11 @@ public class ActivityService {
                 activity.getStartTime().isAfter(LocalDateTime.now());
     }
 
-    private boolean isActivityDescriptionInValid(String description){
+    private boolean isActivityDescriptionInValid(String description) {
         return description.length() < MIN_LENGTH;
     }
 
-    private boolean isActivityStartTimeInvalid(LocalDateTime startTime){
-        return  startTime.isAfter(LocalDateTime.now());
+    private boolean isActivityStartTimeInvalid(LocalDateTime startTime) {
+        return startTime.isAfter(LocalDateTime.now());
     }
 }
