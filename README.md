@@ -9,6 +9,6 @@ ___
 
 ### **Technológiák:**
 -  *Java alapú konzolos alkalmazás.*
--  *Multylayer architektúra.* 
+-  *Multyiayer architektúra.* 
 -  *Adatbázis elérése Jdbc template segitségével* 
 -  *Relációs adatbázis /MariaDb/.* 
