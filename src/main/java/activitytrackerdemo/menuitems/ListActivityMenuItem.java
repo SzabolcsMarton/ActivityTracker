@@ -22,7 +22,10 @@ public class ListActivityMenuItem implements MenuItem {
     public void process(Scanner scanner) {
         allActivities = activityService.getAllActivities();
         System.out.println("\tTevékenységek listázása menüpont");
-        ensureActivitiesNotNullOrEmpty();
+        if (allActivities == null || allActivities.isEmpty()) {
+            System.out.println("--- Nincsenek tárolt tevékenységek ---");
+            return;
+        }
         System.out.println("\tSzeretne szűrni a találatokat?");
         System.out.println("\ty- Igen, n- Nem\t");
         String answer = scanner.nextLine();
@@ -102,13 +105,6 @@ public class ListActivityMenuItem implements MenuItem {
             System.out.println("\t\t" + actual.toString() + "\n");
         }
         System.out.println("\t\t -------------------------------------");
-    }
-
-    private void ensureActivitiesNotNullOrEmpty() {
-        if (allActivities == null || allActivities.isEmpty()) {
-            System.out.println("--- Nincsenek tárolt tevékenységek ---");
-            return;
-        }
     }
 
     private void printFilterSubMenu() {
